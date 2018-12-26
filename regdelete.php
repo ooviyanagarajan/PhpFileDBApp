@@ -1,15 +1,17 @@
 <?php
 require "register.php";
 
-$sqlid="sqid";
+if(isset($_POST["studid"]))
+{  
+   $studid = $_POST["studid"];
+   $sql ="DELETE FROM regis WHERE studid=$studid";
 
-$sql2 = "DELETE FROM regis WHERE studid='$sqlid'";
-
-if ($con->query($sql2) === TRUE) {
-    echo "Record deleted successfully";
-} else {
-    echo "Error deleting record: " . $con->error;
+   if (mysqli_query($con, $sql)) {
+     echo "One record deleted";
+   } 
 }
-
-$con->close();
+else {
+  echo "Error deleting record: " . mysqli_error($con);
+}
+mysqli_close($con);
 ?> 
