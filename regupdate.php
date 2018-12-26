@@ -1,15 +1,19 @@
 <?php
 require "register.php";
 
-$sqlid="Doe";
+if(isset($_POST["studid"])){
 
-$sql = "UPDATE regis SET email='john@rediff.com' WHERE studid='$sqlid'";
+		$studid=$_POST["studid"]; 
+		$email=$_POST["email"]; 
 
-if ($con->query($sql) === TRUE) {
-    echo "Record updated successfully";
-} else {
-    echo "Error updating record: " . $con->error;
+
+	$sql1 = "UPDATE regis SET email='$email' WHERE studid='$studid'";
+	if (mysqli_query($con, $sql1)) {
+		  	echo "record updated";
+	}
 }
-
-$con->close();
+else {  
+echo "Error updating record: " . mysqli_error($con);
+}
+mysqli_close($con);
 ?>
